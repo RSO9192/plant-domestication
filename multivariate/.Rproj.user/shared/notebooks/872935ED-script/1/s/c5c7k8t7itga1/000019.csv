@@ -1,0 +1,7 @@
+"0","ggplot(map.table, aes(Subpopulation,Ca))+
+  geom_point()+
+  geom_label(map.table,label=Sample_ID)
+"
+"2","Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomLabel,  : 
+  object 'Sample_ID' not found
+"

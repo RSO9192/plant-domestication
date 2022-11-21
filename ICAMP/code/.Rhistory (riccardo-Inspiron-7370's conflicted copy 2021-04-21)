@@ -1,0 +1,512 @@
+mutate(C.year.d=C.year-2019) %>%
+mutate(C.year.d=C.year.d*-1)
+samp.data <- data.frame(sample_data(ps.sv))
+samp.data <- left_join(samp.data, collection_time) %>%
+select(Sample_ID,C.year,Ca)
+rownames(samp.data) <- samp.data$Sample_ID
+samp.data <- samp.data[,-1, drop=FALSE]
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+colnames(menv)=paste0("m",colnames(env.use))
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+mdenv=cbind(icres[,1:2],denv)
+View(mdenv)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999)
+source("tools.r")
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999)
+mci
+# read in pair wise comparison for DL
+icres <- readRDS("../outputs/ICAMP.detail.rda")
+icres <- icres[[1]]
+View(icres)
+View(samp.data)
+View(mdenv)
+mdenv <- mdenv %>%
+select(1:2, Ca)
+View(mdenv)
+mdenv <- mdenv %>%
+select(1:2, Ca)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999)
+mci
+View(df)
+# read in pair wise comparison for DL
+icres <- readRDS("../outputs/ICAMP.detail.rda")
+icres <- icres[[1]]
+View(icres)
+df <- icres %>%
+select(1,2,4)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999)
+mci
+mdenv=cbind(icres[,1:2],denv)
+View(mdenv)
+View(samp.data)
+# inclusind collection time
+collection_time <- read_excel("../../../../../../../Accessions to choose/datasets/Stations_collection_year.xlsx") %>%
+select(ACCESION, 'COLLECTED YEAR') %>%
+rename(Sample_ID=ACCESION, C.year='COLLECTED YEAR') %>%
+mutate(Sample_ID=str_squish(Sample_ID)) %>%
+mutate(Sample_ID=str_remove(Sample_ID, " "), C.year=as.numeric(C.year)) %>%
+mutate(C.year.d=C.year-2019) %>%
+mutate(C.year.d=C.year.d*-1)
+samp.data <- data.frame(sample_data(ps.sv))
+View(samp.data)
+samp.data <- left_join(samp.data, collection_time) %>%
+select(Sample_ID,C.year,Ca, Altitude, 12:24)
+View(samp.data)
+rownames(samp.data) <- samp.data$Sample_ID
+samp.data <- samp.data[,-1, drop=FALSE]
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+mdenv=cbind(icres[,1:2],denv)
+View(mdenv)
+View(denv)
+View(time)
+samp.data <- data.frame(sample_data(ps.sv))
+samp.data <- left_join(samp.data, collection_time) %>%
+select(Sample_ID,C.year,Ca)
+rownames(samp.data) <- samp.data$Sample_ID
+samp.data <- samp.data[,-1, drop=FALSE]
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+# read in pair wise comparison for DL
+icres <- readRDS("../outputs/ICAMP.detail.rda")
+icres <- icres[[1]]
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+View(time)
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+View(denv)
+samp.data <- data.frame(sample_data(ps.sv))
+samp.data <- left_join(samp.data, collection_time) %>%
+select(Sample_ID,C.year,Ca, 12:24)
+rownames(samp.data) <- samp.data$Sample_ID
+samp.data <- samp.data[,-1, drop=FALSE]
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+View(denv)
+mdenv=cbind(icres[,1:2],denv)
+View(mdenv)
+View(samp.data)
+# read in pair wise comparison for DL
+icres <- readRDS("../outputs/ICAMP.detail.rda")
+icres <- icres[[1]]
+df <- icres %>%
+select(1,2,4)
+View(df)
+df <- icres %>%
+select(1,2,5)
+View(df)
+df <- icres %>%
+select(1,2,6)
+View(df)
+df <- icres %>%
+select(1,2,7)
+View(df)
+View(mdenv)
+mdenv2 <- mdenv %>%
+select(1:2, C.year)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999)
+mci
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, Weight)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+df <- icres %>%
+select(1,2,3)
+View(df)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, K)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+df <- icres %>%
+select(1,2,4)
+mdenv2 <- mdenv %>%
+select(1:2, K)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+df <- icres %>%
+select(1,2,5)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+View(df)
+# version 2020.9.21, add classification information
+# version 2021.1.7, add (step 15) icamp.cate to summarize for different categories of taxa, e.g. core versus rare taxa.
+library(phyloseq)
+library(tidyverse)
+library(iCAMP)
+library(ape)
+library(metagMisc)
+library(readxl)
+source("~/theme_publication.R")
+# first plot look at the overall importance of ecological processes
+load("../outputs/CIAT.iCAMP.Boot.Dom_event.rda")
+icboot$summary[,1:5] %>%
+filter(Group%in%c("Wild_Ande","Domesticated_Ande","Domesticated_Mesoamerica","Wild_Mesoamerica")) %>%
+mutate(Mean=as.numeric(Mean)) %>%
+filter(Process!="Stochasticity") %>%
+ggplot(aes(Group, y=Mean, fill=Process)) +
+geom_bar(stat = "identity", color="black")+
+ylab("Relative importance (%)")+
+theme_Publication(base_family = 12)+
+theme(axis.text.x=element_text(angle=45,hjust=1))
+load("../outputs/CIAT.iCAMP.Summary.rda")
+icbin$Bin.TopClass %>%
+arrange(desc(BinRA)) %>%
+filter(BinRA>0.02) %>%
+ggplot() +
+geom_bar(aes(fill=Bin, x="Bin", y=BinRA), color="black",position="stack",stat="identity")+
+theme_Publication(base_family = 12)
+icbin$Bin.TopClass %>%
+filter(Bin%in%c("Bin12","Bin13","Bin18","Bin19","Bin29","Bin36","Bin39","Bin43","Bin45","Bin50")) %>%
+ggplot() +
+geom_bar(aes(fill=Genus.maxNamed, x=Bin, y=Genus.maxNamed.Percent), color="black",position="stack",stat="identity")+
+theme_Publication(base_family = 12)+
+ylab("Relative abundance within Bin")
+icbin$Ptk %>%
+select(1:4,bin12, bin13, bin18, bin19, bin29,bin36,bin39,bin43,bin45,bin50) %>%
+filter(Index%in%c("HeS","HoS","DL","HD","DR")) %>%
+filter(Group%in%c("Wild_Ande","Domesticated_Ande","Domesticated_Mesoamerica","Wild_Mesoamerica")) %>%
+gather(key="bins", value, 5:14) %>%
+mutate(value=as.numeric(value)) %>%
+ggplot(aes(bins, value, fill=Index))+
+geom_bar(stat="identity", color="black")+
+facet_grid(~Group)+
+theme_Publication(base_size = 12)+
+theme(axis.text.x=element_text(angle=45,hjust=1))
+View(icbin)
+icbin[["Ptk"]]
+icboot$summary[,1:5] %>%
+filter(Group%in%c("Wild_Ande","Domesticated_Ande","Domesticated_Mesoamerica","Wild_Mesoamerica")) %>%
+mutate(Mean=as.numeric(Mean)) %>%
+filter(Process!="Stochasticity") %>%
+ggplot(aes(Group, y=Mean, fill=Process)) +
+geom_bar(stat = "identity", color="black")+
+ylab("Relative importance (%)")+
+theme_Publication(base_family = 12)+
+theme(axis.text.x=element_text(angle=45,hjust=1))
+View(icboot)
+icboot[["summary"]]
+icboot[["summary"]]
+icboot$summary[,1:5] %>%
+filter(Group%in%c("Wild_Ande","Domesticated_Ande","Domesticated_Mesoamerica","Wild_Mesoamerica")) %>%
+mutate(Mean=as.numeric(Observed)) %>%
+filter(Process!="Stochasticity") %>%
+ggplot(aes(Group, y=Mean, fill=Process)) +
+geom_bar(stat = "identity", color="black")+
+ylab("Relative importance (%)")+
+theme_Publication(base_family = 12)+
+theme(axis.text.x=element_text(angle=45,hjust=1))
+library(vegan)
+library(phyloseq)
+library(metagMisc)
+library(tidyverse)
+library(readxl)
+source("tools.r")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+ps.sv <- readRDS("../../3.filtering/results/tables/ps.rds")
+# Removing SVs that are present at 1% and have total count lower than 20
+ps.sv <- phyloseq_filter_prevalence(ps.sv, prev.trh = 0.01, abund.trh = 20, threshold_condition = "OR", abund.type = "total")
+# inclusind collection time
+collection_time <- read_excel("../../../../../../../Accessions to choose/datasets/Stations_collection_year.xlsx") %>%
+select(ACCESION, 'COLLECTED YEAR') %>%
+rename(Sample_ID=ACCESION, C.year='COLLECTED YEAR') %>%
+mutate(Sample_ID=str_squish(Sample_ID)) %>%
+mutate(Sample_ID=str_remove(Sample_ID, " "), C.year=as.numeric(C.year)) %>%
+mutate(C.year.d=C.year-2019) %>%
+mutate(C.year.d=C.year.d*-1)
+samp.data <- data.frame(sample_data(ps.sv))
+samp.data <- left_join(samp.data, collection_time) %>%
+select(Sample_ID,C.year,Ca, 12:24)
+rownames(samp.data) <- samp.data$Sample_ID
+samp.data <- samp.data[,-1, drop=FALSE]
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+mdenv=cbind(icres[,1:2],denv)
+icres <- readRDS("../outputs/ICAMP.detail.rda")
+icres <- icres[[1]]
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+mdenv=cbind(icres[,1:2],denv)
+View(mdenv)
+mdenv2 <- mdenv %>%
+mutate(Weight=log(Weight)) %>%
+select(1:2, Weight)
+View(mdenv2)
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+df <- icres %>%
+select(1,2,5)
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+View(df)
+df <- icres %>%
+select(1,2,6)
+df <- icres %>%
+select(1,2,7)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+View(mdenv)
+mdenv2 <- mdenv %>%
+select(1:2, log(C.year))
+View(mdenv)
+mdenv2 <- mdenv %>%
+mutate(C.year=log(C.year)) %>%
+select(1:2, C.year)
+View(mdenv2)
+mdenv2 <- mdenv %>%
+mutate(C.year=ifelse(C.year>0, log(C.year),0)) %>%
+select(1:2, C.year)
+View(mdenv2)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, Mg)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, Fe)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, Mn)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+df <- icres %>%
+select(1,2,5)
+mdenv2 <- mdenv %>%
+select(1:2, Mn)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+df <- icres %>%
+select(1,2,7)
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+View(df)
+df <- icres %>%
+select(1,2,3)
+df <- icres %>%
+select(1,2,3)
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+df <- icres %>%
+select(1,2,4)
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "pearson",permutations = 999))
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+df <- icres %>%
+select(1,2,5)
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+mdenv2 <- mdenv %>%
+select(1:2, Mn)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+samp.data <- data.frame(sample_data(ps.sv))
+samp.data <- left_join(samp.data, collection_time) %>%
+select(Sample_ID,C.year,Ca,Altitude, 12:24)
+rownames(samp.data) <- samp.data$Sample_ID
+samp.data <- samp.data[,-1, drop=FALSE]
+# environmental vector to test- euc distances
+time=(samp.data[match(icres$sample1,rownames(samp.data)),]+
+samp.data[match(icres$sample2,rownames(samp.data)),])/2
+denv=abs(samp.data[match(icres$sample1,rownames(samp.data)),]-
+samp.data[match(icres$sample2,rownames(samp.data)),])
+mdenv=cbind(icres[,1:2],denv)
+View(mdenv)
+df <- icres %>%
+select(1,2,5)
+mdenv2 <- mdenv %>%
+select(1:2, Altitude)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5,
+method = "spearman",permutations = 999))
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5, na.rm = TRUE,
+method = "spearman",permutations = 999))
+df <- icres %>%
+select(1,2,3)
+mdenv2 <- mdenv %>%
+select(1:2, Ca)
+(mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5, na.rm = FALSE,
+method = "spearman",permutations = 999))
+df <- icres %>%
+select(1,2,5)
+colnames(mdenv)
+colnames(mdenv)[4:17]
+mci$statistic
+out <- map(colnames(mdenv)[4:17], function(x) {
+mdenv2 <- mdenv %>%
+select(1:2, x)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5, na.rm = FALSE,
+method = "spearman",permutations = 999)
+mci$statistic
+})
+df <- icres %>%
+select(1,2,5)
+colnames(mdenv)[4:17]
+out <- map(colnames(mdenv)[4:17], function(x) {
+mdenv2 <- mdenv %>%
+select(1:2, x)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5, na.rm = TRUE,
+method = "spearman",permutations = 999)
+mci$statistic
+})
+df <- icres %>%
+select(1,2,5)
+out <- map_dbl(colnames(mdenv)[4:17], function(x) {
+mdenv2 <- mdenv %>%
+select(1:2, x)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5, na.rm = TRUE,
+method = "spearman",permutations = 999)
+mci$statistic
+})
+names(out) <- colnames(mdenv)[4:17]
+out
+df <- icres %>%
+select(1,2,7)
+View(df)
+out <- map_dbl(colnames(mdenv)[4:17], function(x) {
+mdenv2 <- mdenv %>%
+select(1:2, x)
+mci=mcMantel(y.3col = df,y.ids = NULL,
+x.3col = mdenv2, grp.rand = NULL,
+grp.const = NULL,try.time = 5, na.rm = TRUE,
+method = "spearman",permutations = 999)
+mci$statistic
+})
+names(out) <- colnames(mdenv)[4:17]
+out
+# version 2020.8.23
+# version 2020.9.21, add classification information
+# version 2021.1.7, add (step 15) icamp.cate to summarize for different categories of taxa, e.g. core versus rare taxa.
+library(phyloseq)
+library(tidyverse)
+library(iCAMP)
+library(ape)
+library(metagMisc)
+library(readxl)
+source("~/theme_publication.R")
+?icamp.big

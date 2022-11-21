@@ -1,0 +1,17 @@
+To process the raw reads submitted to ENA, use the DADA2 package in R. The sequences submitted are already without primers and adapters. 
+For library PVG, we used the following settings:
+
+filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(261,20), 
+                     maxN=0, maxEE=c(3,8), truncQ=2, rm.phix=TRUE,
+                     compress=TRUE, multithread=TRUE, verbose = T)
+                     
+For library PVC, we used the following settings:
+
+filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(220,120), 
+                     maxN=0, maxEE=c(3,5), truncQ=2, rm.phix=TRUE,
+                     compress=TRUE, multithread=TRUE, verbose = T)
+                     
+For library PLC, we used the following settings:
+filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(220,120), 
+                     maxN=0, maxEE=c(3,5), truncQ=2, rm.phix=TRUE,
+                     compress=TRUE, multithread=TRUE, verbose = T)

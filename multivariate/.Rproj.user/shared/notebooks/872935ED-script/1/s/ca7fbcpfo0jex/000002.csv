@@ -1,0 +1,619 @@
+"0","library(tidyverse)"
+"2","Registered S3 methods overwritten by 'dbplyr':
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+"
+"2","[37m── [1mAttaching packages[22m ──────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──[39m
+"
+"2","[37m[32m✓[37m [34mggplot2[37m 3.3.2     [32m✓[37m [34mpurrr  [37m 0.3.4
+[32m✓[37m [34mtibble [37m 3.0.4     [32m✓[37m [34mdplyr  [37m 1.0.2
+[32m✓[37m [34mtidyr  [37m 1.1.2     [32m✓[37m [34mstringr[37m 1.4.0
+[32m✓[37m [34mreadr  [37m 1.4.0     [32m✓[37m [34mforcats[37m 0.5.0[39m
+"
+"2","[37m── [1mConflicts[22m ─────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31mx[37m [34mdplyr[37m::[32mfilter()[37m masks [34mstats[37m::filter()
+[31mx[37m [34mdplyr[37m::[32mlag()[37m    masks [34mstats[37m::lag()[39m
+"
+"0","library(reshape2)"
+"2","
+Attaching package: ‘reshape2’
+
+"
+"2","The following object is masked from ‘package:tidyr’:
+
+    smiths
+
+"
+"0","library(permute)"
+"0","library(lattice)"
+"0","library(scales)"
+"2","
+Attaching package: ‘scales’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    discard
+
+"
+"2","The following object is masked from ‘package:readr’:
+
+    col_factor
+
+"
+"0","library(grid)"
+"0","library(phyloseq)"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"0","library(ape)"
+"0","library(metagMisc)"
+"2","
+Attaching package: ‘metagMisc’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    some
+
+"
+"0","library(png)"
+"0","library(data.table)"
+"2","data.table 1.13.2 using 4 threads (see ?getDTthreads).  Latest news: r-datatable.com
+"
+"2","
+Attaching package: ‘data.table’
+
+"
+"2","The following objects are masked from ‘package:reshape2’:
+
+    dcast, melt
+
+"
+"2","The following objects are masked from ‘package:dplyr’:
+
+    between, first, last
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    transpose
+
+"
+"0","library(RColorBrewer)"
+"0","library(ggsci)"
+"0","library(DECIPHER)"
+"2","Loading required package: Biostrings
+"
+"2","Loading required package: BiocGenerics
+"
+"2","Loading required package: parallel
+"
+"2","
+Attaching package: ‘BiocGenerics’
+
+"
+"2","The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ, clusterExport, clusterMap, parApply,
+    parCapply, parLapply, parLapplyLB, parRapply, parSapply, parSapplyLB
+
+"
+"2","The following objects are masked from ‘package:dplyr’:
+
+    combine, intersect, setdiff, union
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames, dirname, do.call, duplicated, eval,
+    evalq, Filter, Find, get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind, Reduce, rownames, sapply,
+    setdiff, sort, table, tapply, union, unique, unsplit, which.max, which.min
+
+"
+"2","Loading required package: S4Vectors
+"
+"2","Loading required package: stats4
+"
+"2","
+Attaching package: ‘S4Vectors’
+
+"
+"2","The following objects are masked from ‘package:data.table’:
+
+    first, second
+
+"
+"2","The following objects are masked from ‘package:dplyr’:
+
+    first, rename
+
+"
+"2","The following object is masked from ‘package:tidyr’:
+
+    expand
+
+"
+"2","The following object is masked from ‘package:base’:
+
+    expand.grid
+
+"
+"2","Loading required package: IRanges
+"
+"2","
+Attaching package: ‘IRanges’
+
+"
+"2","The following object is masked from ‘package:data.table’:
+
+    shift
+
+"
+"2","The following object is masked from ‘package:phyloseq’:
+
+    distance
+
+"
+"2","The following objects are masked from ‘package:dplyr’:
+
+    collapse, desc, slice
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    reduce
+
+"
+"2","Loading required package: XVector
+"
+"2","
+Attaching package: ‘XVector’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    compact
+
+"
+"2","
+Attaching package: ‘Biostrings’
+
+"
+"2","The following object is masked from ‘package:ape’:
+
+    complement
+
+"
+"2","The following object is masked from ‘package:base’:
+
+    strsplit
+
+"
+"2","Loading required package: RSQLite
+"
+"0","library(phangorn)"
+"0","library(ShortRead)"
+"2","Loading required package: BiocParallel
+"
+"2","Loading required package: Rsamtools
+"
+"2","Loading required package: GenomeInfoDb
+"
+"2","Loading required package: GenomicRanges
+"
+"2","Loading required package: GenomicAlignments
+"
+"2","Loading required package: SummarizedExperiment
+"
+"2","Loading required package: MatrixGenerics
+"
+"2","Loading required package: matrixStats
+"
+"2","
+Attaching package: ‘matrixStats’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    count
+
+"
+"2","
+Attaching package: ‘MatrixGenerics’
+
+"
+"2","The following objects are masked from ‘package:matrixStats’:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse, colCounts, colCummaxs, colCummins,
+    colCumprods, colCumsums, colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs, colMads,
+    colMaxs, colMeans2, colMedians, colMins, colOrderStats, colProds, colQuantiles, colRanges, colRanks,
+    colSdDiffs, colSds, colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads, colWeightedMeans,
+    colWeightedMedians, colWeightedSds, colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods, rowCumsums, rowDiffs, rowIQRDiffs,
+    rowIQRs, rowLogSumExps, rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks, rowSdDiffs, rowSds, rowSums2,
+    rowTabulates, rowVarDiffs, rowVars, rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+"
+"2","Loading required package: Biobase
+"
+"2","Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with 'browseVignettes()'. To cite Bioconductor, see
+    'citation(""Biobase"")', and for packages 'citation(""pkgname"")'.
+
+"
+"2","
+Attaching package: ‘Biobase’
+
+"
+"2","The following object is masked from ‘package:MatrixGenerics’:
+
+    rowMedians
+
+"
+"2","The following objects are masked from ‘package:matrixStats’:
+
+    anyMissing, rowMedians
+
+"
+"2","The following object is masked from ‘package:phyloseq’:
+
+    sampleNames
+
+"
+"2","Registered S3 method overwritten by 'htmlwidgets':
+  method           from         
+  print.htmlwidget tools:rstudio
+"
+"2","
+Attaching package: ‘GenomicAlignments’
+
+"
+"2","The following object is masked from ‘package:data.table’:
+
+    last
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    last
+
+"
+"2","
+Attaching package: ‘ShortRead’
+
+"
+"2","The following object is masked from ‘package:data.table’:
+
+    tables
+
+"
+"2","The following object is masked from ‘package:ape’:
+
+    zoom
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    id
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    compose
+
+"
+"2","The following object is masked from ‘package:tibble’:
+
+    view
+
+"
+"0","library(dada2)"
+"2","Loading required package: Rcpp
+"
+"0","library(ampvis2)"
+"2","This is ampvis2 version 2.6.7"
+"2"," (newer version 2.7.4 available)"
+"2",". Great documentation is available at the ampvis2 website: https://madsalbertsen.github.io/ampvis2/
+"
+"0","library(devtools)"
+"2","Loading required package: usethis
+"
+"2","
+Attaching package: ‘devtools’
+
+"
+"2","The following object is masked from ‘package:permute’:
+
+    check
+
+"
+"0","library(stringr)"
+"0","library(glue)"
+"2","
+Attaching package: ‘glue’
+
+"
+"2","The following object is masked from ‘package:SummarizedExperiment’:
+
+    trim
+
+"
+"2","The following object is masked from ‘package:GenomicRanges’:
+
+    trim
+
+"
+"2","The following object is masked from ‘package:Biostrings’:
+
+    collapse
+
+"
+"2","The following objects are masked from ‘package:IRanges’:
+
+    collapse, trim
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    collapse
+
+"
+"0","library(gridExtra)"
+"2","
+Attaching package: ‘gridExtra’
+
+"
+"2","The following object is masked from ‘package:Biobase’:
+
+    combine
+
+"
+"2","The following object is masked from ‘package:BiocGenerics’:
+
+    combine
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    combine
+
+"
+"0","#library(phylogeo)"
+"0","library(ggvegan)"
+"2","Loading required package: vegan
+"
+"2","This is vegan 2.5-6
+"
+"2","
+Attaching package: ‘vegan’
+
+"
+"2","The following objects are masked from ‘package:phangorn’:
+
+    diversity, treedist
+
+"
+"0","library(microbiomeSeq)"
+"2","Registered S3 methods overwritten by 'adegraphics':
+  method         from
+  biplot.dudi    ade4
+  kplot.foucart  ade4
+  kplot.mcoa     ade4
+  kplot.mfa      ade4
+  kplot.pta      ade4
+  kplot.sepan    ade4
+  kplot.statis   ade4
+  scatter.coa    ade4
+  scatter.dudi   ade4
+  scatter.nipals ade4
+  scatter.pco    ade4
+  score.acm      ade4
+  score.mix      ade4
+  score.pca      ade4
+  screeplot.dudi ade4
+"
+"2","Registered S3 method overwritten by 'spdep':
+  method   from
+  plot.mst ape 
+"
+"2","Registered S3 methods overwritten by 'adespatial':
+  method             from       
+  plot.multispati    adegraphics
+  print.multispati   ade4       
+  summary.multispati ade4       
+"
+"0","library(metacoder)"
+"2","Loading required package: taxa
+"
+"2","
+Attaching package: ‘taxa’
+
+"
+"2","The following object is masked from ‘package:phyloseq’:
+
+    filter_taxa
+
+"
+"2","The following object is masked from ‘package:ggplot2’:
+
+    map_data
+
+"
+"2","This is metacoder verison 0.3.4 (stable)
+"
+"2","
+Attaching package: ‘metacoder’
+
+"
+"2","The following object is masked from ‘package:ShortRead’:
+
+    reverse
+
+"
+"2","The following objects are masked from ‘package:Biostrings’:
+
+    complement, reverse
+
+"
+"2","The following object is masked from ‘package:XVector’:
+
+    reverse
+
+"
+"2","The following object is masked from ‘package:IRanges’:
+
+    reverse
+
+"
+"2","The following object is masked from ‘package:ape’:
+
+    complement
+
+"
+"0","library(vegan)"
+"0","library(corrplot)"
+"2","corrplot 0.84 loaded
+"
+"0","library(Hmisc)"
+"2","Loading required package: survival
+"
+"2","Loading required package: Formula
+"
+"2","
+Attaching package: ‘Hmisc’
+
+"
+"2","The following object is masked from ‘package:ShortRead’:
+
+    zoom
+
+"
+"2","The following object is masked from ‘package:Biobase’:
+
+    contents
+
+"
+"2","The following objects are masked from ‘package:Biostrings’:
+
+    mask, translate
+
+"
+"2","The following object is masked from ‘package:ape’:
+
+    zoom
+
+"
+"2","The following objects are masked from ‘package:dplyr’:
+
+    src, summarize
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    format.pval, units
+
+"
+"0","library(lme4)"
+"2","Loading required package: Matrix
+"
+"2","
+Attaching package: ‘Matrix’
+
+"
+"2","The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+"
+"2","The following objects are masked from ‘package:tidyr’:
+
+    expand, pack, unpack
+
+"
+"0","library(nlme)"
+"2","
+Attaching package: ‘nlme’
+
+"
+"2","The following object is masked from ‘package:lme4’:
+
+    lmList
+
+"
+"2","The following object is masked from ‘package:glue’:
+
+    collapse
+
+"
+"2","The following object is masked from ‘package:Biostrings’:
+
+    collapse
+
+"
+"2","The following object is masked from ‘package:IRanges’:
+
+    collapse
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    collapse
+
+"
+"0","library(car)"
+"2","Loading required package: carData
+"
+"2","Registered S3 methods overwritten by 'car':
+  method                          from
+  influence.merMod                lme4
+  cooks.distance.influence.merMod lme4
+  dfbeta.influence.merMod         lme4
+  dfbetas.influence.merMod        lme4
+"
+"2","
+Attaching package: ‘car’
+
+"
+"2","The following object is masked from ‘package:metagMisc’:
+
+    some
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    recode
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    some
+
+"
+"0","source('~/theme_publication.R')"
+"0","library(jtools)"
+"2","
+Attaching package: ‘jtools’
+
+"
+"2","The following object is masked from ‘package:Hmisc’:
+
+    %nin%
+
+"
+"2","The following object is masked from ‘package:taxa’:
+
+    get_data
+
+"

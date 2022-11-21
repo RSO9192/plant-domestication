@@ -1,0 +1,25 @@
+{
+    "id": "27B7FB44",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1617191887764.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "id": "a3bf193cbcee4b6183299da1aba61c21",
+        "name": "microb_glm",
+        "title": "microb_glm"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 94262655177768,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1617191887764,
+    "read_only": false,
+    "read_only_alternatives": []
+}

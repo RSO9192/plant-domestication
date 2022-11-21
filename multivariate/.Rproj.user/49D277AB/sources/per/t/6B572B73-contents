@@ -1,0 +1,140 @@
+library(mvabund)
+library(lattice)
+library(gllvm)
+library(corrplot) 
+library(phyloseq)
+
+# loading the phyloseq object filtered to remove SVs not present
+ps.sv <- readRDS("../../3.filtering/results/tables/ps_sv_filt.rds")
+
+# samples needs to be in rows
+otu.table <- t(as.data.frame(otu_table(ps.sv)))
+# reading in sample data
+samp.data <- data.frame(sample_data(ps.sv))
+# making otu table as mv abund object
+otu.MV <- mvabund(otu.table)
+#fitting the null model
+ft_reveg0=manyglm(otu.MV ~1, data=samp.data)
+# offset as difference between total counts peer sample and the NULL model
+QDoffset = log(rowSums(otu.MV)) - log(rowSums(predict.manyglm(ft_reveg0)))
+
+# manyglm. default is negative binomial. Considering Ca
+microb_glm = manyglm(otu.MV~ Ca, data = samp.data, offset = QDoffset, composition = FALSE)
+microb_glm$AICsum
+plot(microb_glm)
+# anova
+out <- anova(microb_glm, nBoot=999,test="LR", p.uni = "adjusted")
+out
+saveRDS(out,"../tables/Ca.rds")
+# Subpopulation as block
+out.block <- anova(microb_glm, nBoot=999,test="LR", p.uni = "adjusted", resamp = "case", block = "Subpopulation")
+out.block
+saveRDS(out.block,"../tables/Ca.Subpop_block.rds")
+# Regeneration site as block
+out.block2 <- anova(microb_glm, nBoot=999,test="LR", p.uni = "adjusted", resamp = "case", block = "Regeneration_site")
+out.block2
+saveRDS(out.block2,"../tables/Ca.site_block.rds")
+# Regeneration site
+microb_glm.site = manyglm(otu.MV~ Regeneration_site, data = samp.data, offset = QDoffset, composition = FALSE)
+
+out.site <- anova(microb_glm.site, nBoot=999,test="LR", p.uni = "adjusted")
+out.site
+
+# Subpopulation
+microb_glm.sub = manyglm(otu.MV~ Subpopulation, data = samp.data, offset = QDoffset, composition = FALSE)
+
+out.sub <- anova(microb_glm.sub, nBoot=999,test="LR", p.uni = "adjusted")
+
+out.sub
+saveRDS(out.sub,"../tables/Subpop.rds")
+
+
+# if we got to understandwhich variable is best in explaining our deviance, I need to compare it to a 
+# intercept only mdoel
+
+microb_1 <- manyglm(otu.MV~1,data = samp.data)
+-2*sum(logLik(microb_1)) # this is the unexplained deviance
+
+-2*sum(logLik(microb_glm4)) # residual deviance for a model
+
+-2*sum(logLik(microb_1))+2*sum(logLik(microb_glm)) # explained deviance
+
+
+devs = rep(NA,ncol(samp.data[12:24]))
+names(devs) = colnames(samp.data[12:24])
+
+samp.data2 <- samp.data[,12:24]
+
+for (iVar in 1:ncol(samp.data2)) {
+  spid_glmi = manyglm(otu.MV~samp.data2[,iVar],offset = QDoffset,data = samp.data2)
+  devs[iVar] = -2*sum(logLik(spid_glmi))
+}
+
+deltadevs = -2*sum(logLik(microb_1))-devs # this is now calculating the explained deviance. The bigger the better
+# Potassium and Calcium explain the most deviance. Calcium seems the best
+deltadevs
+
+# Note that because Subpopulation is correlated with mineral concentration, it cannot be included easily in the analysis. 
+# If we include it sequentially, so each cation at a time and then Suppopulation, we can see that subpopulation explain most of the deviance,
+# but that it is obvious as Subpopulation is a categorical variable and it is also correlated with cations. It explains more than Ca because
+# for Ca we are estimating 2 things (intercept and slope) whther for Subpopulation 4 (4 means).
+
+# Best model
+microb_glm = manyglm(otu.MV~Ca,offset = QDoffset, data = samp.data)
+
+microb_glm.sub$AICsum
+microb_glm$AICsum  # the lower AIC for Ca compared to Subpopulation confirm that this is the best model
+microb_glm.site$AICsum
+
+out <- anova(microb_glm, nBoot=999,test="LR", p.uni = "adjusted")
+
+saveRDS(out,"Ca.rds")
+
+out$table[2,3]
+
+
+# getting the species that explain the deviance
+
+sum(sort(out5$uni.test[2,], decreasing=TRUE))
+
+sum(out$uni.test[2,])
+
+(328/3450)*100 # 58% of the total deviance for soil dryness is made out of 6 species
+
+# getting the coefficients
+microb_glm$coefficients[,1:10]
+spid_glm$stderr.coefficients 
+
+coefplot(microb_glm) 
+
+levelplot(microb_glm$coefficients[-1,], scales=list(x=list(rot=45)))
+
+
+# if you want to know how mych deviance is your variable explaining, you run an anova
+
+an=anova(spid_1, spid_glm, nBoot = 1) # do not look at the p-value. this is only for the deviance. The results tell us the total deviance explained by the second model. 
+# it is the difference between -2*sum(logLik(spid_1)) and -2*sum(logLik(spid_glm))
+totDevexpl=an$table[2,3]
+
+deltadevs/totDevexpl # 31%  of the deviance is explained by soil dry 
+
+predict(spid_glm)
+
+
+# gglvm- laten variables model
+
+pider.un. <- gllvm(spider$abund, num.lv = 2, family = "negative.binomial")
+
+plot(pider.un., which = 2)
+
+ordiplot(pider.un., ind.spp=10,biplot=TRUE)
+
+## For plotting correlations
+res_cors <- getResidualCor(pider.un.)
+
+corrplot(res_cors, title = "Residual correlations", diag = FALSE, type = "lower")
+
+pider.c <- gllvm(spider$abund,spider$x, num.lv = 2, family = "negative.binomial")
+
+ordiplot(pider.c)
+
