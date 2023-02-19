@@ -43,10 +43,9 @@ otu.tab.status <- data.frame(otu_table(ps.sv)) %>%
 
 boruta.out.status <- Boruta(Status~., otu.tab.status)
 
-x <- getSelectedAttributes(boruta.out.status, withTentative = F)
+# x <- getSelectedAttributes(boruta.out.status, withTentative = F)
 
-save(x, file="../results/Boruta.rda")
-
+# this was saved already
 load("../results/Boruta.rda")
 
 # combination of Boruta variables
@@ -85,7 +84,7 @@ for (i in 1:length(comb)) {
   
 }
 
-saveRDS(out, "../results/comb_status.rds")
+# saveRDS(out, "../results/comb_status.rds")
 
 out <- readRDS("../results/comb_status.rds")
 
@@ -180,7 +179,7 @@ Status_RF$pred$data %>%
 ggsave("../results/conf_matrix_Status.svg", width = 7, height = 9, units = "cm")
 
 
-# defining the indicator species
+# defining the indicator species. Not used in the paper
 
 tax.table <- data.frame(tax_table(ps.sv)) %>% 
   rownames_to_column(var="SV") %>% 
@@ -231,7 +230,7 @@ otu.tab.status %>%
 
 ggsave("../results/indicator_species.svg", width = 7, height = 18, units = "cm")
 
-
+# Now we repeat the same for the domestication event
 
 # RF Dom_event ------------------------------------------------------------
 
@@ -239,7 +238,7 @@ boruta.out <- Boruta(Dom_event~., otu.tab)
 
 x <- getSelectedAttributes(boruta.out, withTentative = F)
 
-save(x, file = "../results/Boruta_dom_event.rda")
+# save(x, file = "../results/Boruta_dom_event.rda")
 
 load("../results/Boruta_dom_event.rda")
 
@@ -334,8 +333,6 @@ RF.dom_event <- map(1:2, function(i) {
   kfold_cv <- makeResampleDesc(method = 'RepCV', folds = 5, reps = 10)
   
   
-  # we reached 97% accuracy after tuning. 
-  
   rforest_tuned_cv.status <- resample(learner =rforest_tuned.status,
                                       task = microbTask,
                                       resampling = kfold_cv,
@@ -344,7 +341,7 @@ RF.dom_event <- map(1:2, function(i) {
   
 })
 
-# With subselecting at random the variables identified by Boruta, we increased accuracy from 88% to 92%. 
+
 (RF.dom_event[[2]]$aggr[1])-(RF.dom_event[[1]]$aggr[1])
 
 saveRDS(RF.dom_event[[2]], "../results/Dom_event_RF.rds")
@@ -377,26 +374,3 @@ Dom_event_RF$pred$data %>%
   coord_flip()
 
 ggsave("../results/conf_matrix_Dom_event.svg", width = 5, height = 9, units = "cm")
-
-# saving indicator species for Status and their sequences
-
-library(glue)
-library(data.table)
-
-taxa <- data.frame(tax_table(ps.sv)) %>% 
-  rownames_to_column(var = "SV") %>% 
-  filter(SV%in%x)
-
-seq_SV <- read.csv("../../3.filtering/results/tables/otu_no_contaminants_SV_seq_no_NC_reads.txt") %>% 
-  filter(SV%in%x) %>% 
-  dplyr::select(X, SV, Genus, Class) %>% 
-  mutate(name=ifelse(!is.na(Genus), paste0("> ", SV, "_", Genus), paste0("> ", SV, "_", Class)))
-
-
-vector <- glue("{seq_SV$name}\n{seq_SV$X}")
-
-fwrite(list(vector), file = "../results/seq_ind_species_PVC.fasta", quote = FALSE)
-
-
-
-
