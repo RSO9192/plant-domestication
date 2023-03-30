@@ -19,6 +19,7 @@ samp.data <- data.frame(sample_data(ps.sv)) %>%
   mutate(Sample_ID=str_replace(Sample_ID, "-", ".")) %>% 
   mutate(Dom_event=paste0(.$Dom_event, "_", .$Status))
 
+# make relative abundance and prepare df with subpopulation as target
 otu.tab <- data.frame(otu_table(ps.sv)) %>% 
   mutate_if(is.numeric, function(x) {x/sum(x)*100}) %>%
   t() %>%
@@ -28,7 +29,7 @@ otu.tab <- data.frame(otu_table(ps.sv)) %>%
   select(1:1173, Dom_event, -Sample_ID) %>% 
   mutate(Dom_event=as.factor(Dom_event))
 
-
+# make relative abundance and prepare df with biological status as target
 otu.tab.status <- data.frame(otu_table(ps.sv)) %>% 
   mutate_if(is.numeric, function(x) {x/sum(x)*100}) %>%
   t() %>%
@@ -48,7 +49,7 @@ boruta.out.status <- Boruta(Status~., otu.tab.status)
 # this was saved already
 load("../results/Boruta.rda")
 
-# combination of Boruta variables
+# combination of Boruta variables. We are simply sampling combination of features selected by Boruta.
 
 comb <- map(1:5000, ~ map(2:length(x), ~ sample(x,.x)))
 
@@ -71,7 +72,7 @@ for (i in 1:length(comb)) {
     kfold_cv <- makeResampleDesc(method = 'RepCV', folds = 5, reps = 10)
     
     
-    rforest_cv.status <- resample(learner = rforest,
+    rforest_cv.status <- mlr::resample(learner = rforest,
                                   task = microbTask,
                                   resampling = kfold_cv,
                                   measures = list(acc, mmce))
@@ -94,11 +95,11 @@ accu <- unlist(map(1:length(out), function(x) {
   })
 }))
 
-
+# maximum accuracy reached
 max(accu)
-
+# filtering
 out2 <- map(1:length(out), ~ list.filter(out[[.x]], acc.test.mean>=0.93))
-
+# retaining the SVs
 indic.spec <- list.clean(out2, function(x) length(x) == 0L, recursive = TRUE)
 
 indic.spec.best <- unlist(indic.spec[[1]])[3:7]
@@ -143,7 +144,7 @@ RF.status <- map(1:2, function(i) {
   
   
   
-  rforest_tuned_cv.status <- resample(learner =rforest_tuned.status,
+  rforest_tuned_cv.status <- mlr::resample(learner =rforest_tuned.status,
                                       task = microbTask,
                                       resampling = kfold_cv,
                                       measures = list(acc, mmce))
@@ -176,61 +177,8 @@ Status_RF$pred$data %>%
         axis.ticks.x=element_blank())+
   coord_flip()
 
-ggsave("../results/conf_matrix_Status.svg", width = 7, height = 9, units = "cm")
 
-
-# defining the indicator species. Not used in the paper
-
-tax.table <- data.frame(tax_table(ps.sv)) %>% 
-  rownames_to_column(var="SV") %>% 
-  filter(SV%in%(indic.spec.best))
-
-otu.tab.status %>% 
-  select(all_of(indic.spec.best), Status) %>% 
-  pivot_longer(1:length(indic.spec.best), names_to = "SV") %>% 
-  left_join(tax.table) %>% 
-  group_by(Status, SV) %>% 
-  summarise(mean=mean(value)) %>% 
-  ggplot(aes(SV, mean, fill=Status)) +
-  geom_bar(stat="identity", color="black") +
-  ylab("RL")+
-  xlab("SVs")+
-  theme_Publication()+
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-
-# as before but using all outputs of Boruta
-
-tax.table <- data.frame(tax_table(ps.sv)) %>% 
-  rownames_to_column(var="SV") %>% 
-  filter(SV%in%(x))
-
-options(scipen=999)
-
-RA <- otu.tab.status %>% 
-  select(all_of(x), Status) %>% 
-  pivot_longer(1:length(x), names_to = "SV") %>% 
-  left_join(tax.table) %>% 
-  group_by(Status, SV) %>% 
-  summarise(mean=mean(value)) %>% 
-  pivot_wider(names_from = Status, values_from = mean)
-
-otu.tab.status %>% 
-  select(all_of(x), Status) %>% 
-  pivot_longer(1:length(x), names_to = "SV") %>% 
-  left_join(tax.table) %>% 
-  group_by(Status, SV) %>% 
-  summarise(mean=mean(value)) %>% 
-  ggplot(aes(SV, mean, fill=Status)) +
-  geom_bar(stat="identity", color="black") +
-  ylab("RA (%)")+
-  xlab("SVs")+
-  theme_Publication()+
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))+
-  coord_flip()
-
-ggsave("../results/indicator_species.svg", width = 7, height = 18, units = "cm")
-
-# Now we repeat the same for the domestication event
+# Now we repeat the same for the domestication event within domestication status. Basically, AE, AD, MD, MW
 
 # RF Dom_event ------------------------------------------------------------
 
@@ -262,7 +210,7 @@ for (i in 1:length(comb)) {
     kfold_cv <- makeResampleDesc(method = 'RepCV', folds = 5, reps = 10)
     
     
-    rforest_cv.status <- resample(learner = rforest,
+    rforest_cv.status <- mlr::resample(learner = rforest,
                                   task = microbTask,
                                   resampling = kfold_cv,
                                   measures = list(acc, mmce))
@@ -333,7 +281,7 @@ RF.dom_event <- map(1:2, function(i) {
   kfold_cv <- makeResampleDesc(method = 'RepCV', folds = 5, reps = 10)
   
   
-  rforest_tuned_cv.status <- resample(learner =rforest_tuned.status,
+  rforest_tuned_cv.status <- mlr::resample(learner =rforest_tuned.status,
                                       task = microbTask,
                                       resampling = kfold_cv,
                                       measures = list(acc, mmce))
@@ -372,5 +320,3 @@ Dom_event_RF$pred$data %>%
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank())+
   coord_flip()
-
-ggsave("../results/conf_matrix_Dom_event.svg", width = 5, height = 9, units = "cm")
