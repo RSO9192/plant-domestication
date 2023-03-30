@@ -1,5 +1,5 @@
 # This script was used for the model-based multivariate analysis. Here we show how to perform this analysis for the 
-# experiment with P. vulgaris from CGIAR-CIAT (2nd experiment). The same logic applies for the other experiments. PVS in the file 
+# experiment with P. vulgaris from CGIAR-CIAT (2nd experiment). The same logic applies for the other experiments. PVC in the file 
 # name stands for P. vulgaris CIAT
 
 library(mvabund)
