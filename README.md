@@ -4,4 +4,4 @@ This repository contains the data and main analysis performed on the research st
 Raw sequences are deposited in ENA, but phyloseq objects are available from the data folder. Scripts used for the main analysis of this paper are found in folders multivariate and Random_Forest
 
 
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![example event parameter](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?event=push)
