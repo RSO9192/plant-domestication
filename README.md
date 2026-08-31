@@ -1,5 +1,5 @@
 # Consistent effects of independent domestication events on the plant microbiota
-[![DOI](https://zenodo.org/records/8396606)
+[Zenodo data repository](https://zenodo.org/records/8396606)
 
 This repository contains the data and main analysis performed on the research study titled: "[Consistent effects of independent domestication events on the plant microbiota](https://www.cell.com/current-biology/pdf/S0960-9822(23)01756-6.pdf)"
 
